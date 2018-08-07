@@ -1,29 +1,15 @@
----
-title: "README"
-output: word_document
----
+###The purpose of this document is to explain the execution steps followed in the run_analysis.R script.
 
-Prerequisites:
-Download the data set package and set the working directory to the location of the unzipped folder.
+###**Functions:**
+###The script has one function *build_tidy_dataset*
+###**Purpose** The function reads all the files from the "test" or the "train" folder based the value of its input parameter *type*
+###**Input:** type. Possible values are "test" or "train"
+###**Output:** a tidy data frame which has data for all the subjects, activities, features from the test/train folder. The activity labels for the corresponding activity ids are also added.
 
-build_tidy_dataset(type, ActivityName, column names)
-This function is called from merge_datasets function. It is used read the respective files in the 'Test' and 'Train' folders.
-*type -> "test"/"Train"
-*ActivityName -> passed from merge_datasets function
-*column names --> passed from merge_datasets function
-
-merge_datasets()
-This function merges the data from the test and train folders.
-
-mean_std_df(mergedDataset)
-This function extracts only the measurements on the mean and standard deviation for each measurement
-
-clean_df_columnnames(mergedDataset)
-Uses descriptive activity names to name the activities in the data set
-
-average_df(mergedDataset)
-Create a tidy data set with the average of each variable for each activity and each subject.
-
-generateCodeBook(mergedDataset)
-Generates the code book for the final tidy data set.
-
+###**Below are are high-level steps of execution:**
+###1. Read the column names from the "*features.txt*" files and clean up the names by removing unwanted special characters.
+###2. Call the *build_tidy_dataset* function to create tidy data frames objects *tidy_testt* and *tidy_train*
+###3. *rbind tidy_test and tidy_train* data sets to create the *final_dataset*
+###4. Extract the columns with *mean or std* in their column names and subset data from these columns of the *final_dataset* to create the *tidy_mean_std_col_data* tidy dataframe
+###5. Appropriately labels the dataframe with descriptive variable names by using a series of sub and gsub functions.
+###6. Create *tidy_average_data* dataframe to compute the average of each column of the *tidy_mean_std_col_data* per subject and per activity using the *aggregate* function.
