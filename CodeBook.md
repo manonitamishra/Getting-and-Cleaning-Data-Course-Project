@@ -1,252 +1,214 @@
-## Tidy data set column details
+# Code book for Coursera *Getting and Cleaning Data* course project
 
-## The below table describes in details the names, class and description of each of the column of the tidy data set.
+The data set that this code book pertains to is located in the `tidy_data.txt` file of this repository.
 
+See the `README.md` file of this repository for background information on this data set.
 
--------------------------------------------------------------------------------------------------------------
-Label   Variable                                                 Class       # unique  Missing  Description  
-                                                                               values                        
-------- -------------------------------------------------------- --------- ---------- --------- -------------
-        **[SubjectId]**                                          integer           30  0.00 %                
+The structure of the data set is described in the [Data](#data) section, its variables are listed in the [Variables](#variables) section, and the transformations that were carried out to obtain the data set based on the source data are presented in the [Transformations](#transformations) section.
 
-        **[ActivityId]**                                         integer            6  0.00 %                
+## Data <a name="data"></a>
 
-        **[ActivityName]**                                       factor             6  0.00 %                
+The `tidy_data.txt` data file is a text file, containing space-separated values.
 
-        **[Time.BodyAccelerometer.Mean.                          numeric        10292  0.00 %                
-        X]**                                                                                                 
+The first row contains the names of the variables, which are listed and described in the [Variables](#variables) section, and the following rows contain the values of these variables. 
 
-        **[Time.BodyAccelerometer.Mean.                          numeric        10299  0.00 %                
-        Y]**                                                                                                 
+## Variables <a name="variables"></a>
 
-        **[Time.BodyAccelerometer.Mean.                          numeric        10293  0.00 %                
-        Z]**                                                                                                 
+Each row contains, for a given subject and activity, 79 averaged signal measurements.
 
-        **[Time.BodyAccelerometer.STD.                           numeric        10295  0.00 %                
-        X]**                                                                                                 
+### Identifiers <a name="identifiers"></a>
 
-        **[Time.BodyAccelerometer.STD.                           numeric        10297  0.00 %                
-        Y]**                                                                                                 
+- `SubjectId`
 
-        **[Time.BodyAccelerometer.STD.                           numeric        10297  0.00 %                
-        Z]**                                                                                                 
+	Subject identifier, integer, ranges from 1 to 30.
 
-        **[Time.GravityAccelerometer.Mean.                       numeric        10296  0.00 %                
-        X]**                                                                                                 
+- `ActivityId`
 
-        **[Time.GravityAccelerometer.Mean.                       numeric        10298  0.00 %                
-        Y]**                                                                                                 
+	Activity identifier, string with 6 possible values in `ActivityName`: 
+	- `WALKING`: subject was walking
+	- `WALKING_UPSTAIRS`: subject was walking upstairs
+	- `WALKING_DOWNSTAIRS`: subject was walking downstairs
+	- `SITTING`: subject was sitting
+	- `STANDING`: subject was standing
+	- `LAYING`: subject was laying
 
-        **[Time.GravityAccelerometer.Mean.                       numeric        10299  0.00 %                
-        Z]**                                                                                                 
+### Average of measurements <a name="average-measurements"></a>
 
-        **[Time.GravityAccelerometer.STD.                        numeric        10288  0.00 %                
-        X]**                                                                                                 
+All measurements are floating-point values, normalised and bounded within [-1,1].
 
-        **[Time.GravityAccelerometer.STD.                        numeric        10293  0.00 %                
-        Y]**                                                                                                 
+Prior to normalisation, acceleration measurements (variables containing `Accelerometer`) were made in *g*'s (9.81 m.s⁻²) and gyroscope measurements (variables containing `Gyroscope`) were made in radians per second (rad.s⁻¹).
 
-        **[Time.GravityAccelerometer.STD.                        numeric        10296  0.00 %                
-        Z]**                                                                                                 
+Magnitudes of three-dimensional signals (variables containing `Magnitude`) were calculated using the Euclidean norm.
 
-        **[Time.BodyAccelerometer.Jerk.Mean.                     numeric        10299  0.00 %                
-        X]**                                                                                                 
+The measurements are classified in two domains:
 
-        **[Time.BodyAccelerometer.Jerk.Mean.                     numeric        10299  0.00 %                
-        Y]**                                                                                                 
+- Time-domain signals (variables prefixed by `timeDomain`), resulting from the capture of accelerometer and gyroscope raw signals.
 
-        **[Time.BodyAccelerometer.Jerk.Mean.                     numeric        10299  0.00 %                
-        Z]**                                                                                                 
+- Frequency-domain signals (variables prefixed by `frequencyDomain`), resulting from the application of a Fast Fourier Transform (FFT) to some of the time-domain signals.
 
-        **[Time.BodyAccelerometer.Jerk.STD.                      numeric        10290  0.00 %                
-        X]**                                                                                                 
+#### Time-domain signals
 
-        **[Time.BodyAccelerometer.Jerk.STD.                      numeric        10296  0.00 %                
-        Y]**                                                                                                 
+- Average time-domain body acceleration in the X, Y and Z directions:
 
-        **[Time.BodyAccelerometer.Jerk.STD.                      numeric        10293  0.00 %                
-        Z]**                                                                                                 
+	- `Time.BodyAccelerometer.STD. X`
+	- `Time.BodyAccelerometer.STD. Y`
+	- `Time.BodyAccelerometer.STD. Z`
 
-        **[Time.BodyGyroscope.Mean.                              numeric        10298  0.00 %                
-        X]**                                                                                                 
+- Standard deviation of the time-domain body acceleration in the X, Y and Z directions:
 
-        **[Time.BodyGyroscope.Mean.                              numeric        10299  0.00 %                
-        Y]**                                                                                                 
+	- `Time.BodyAccelerometer.STD. X`
+	- `Time.BodyAccelerometer.STD. Y
+	- `Time.BodyAccelerometer.STD. Z`
 
-        **[Time.BodyGyroscope.Mean.                              numeric        10297  0.00 %                
-        Z]**                                                                                                 
+- Average time-domain gravity acceleration in the X, Y and Z directions:
 
-        **[Time.BodyGyroscope.STD.                               numeric        10292  0.00 %                
-        X]**                                                                                                 
+	- `Time.GravityAccelerometer.Mean. X`
+	- `Time.GravityAccelerometer.Mean. Y`
+	- `Time.GravityAccelerometer.Mean. Z`
 
-        **[Time.BodyGyroscope.STD.                               numeric        10296  0.00 %                
-        Y]**                                                                                                 
+- Standard deviation of the time-domain gravity acceleration in the X, Y and Z directions:
 
-        **[Time.BodyGyroscope.STD.                               numeric        10296  0.00 %                
-        Z]**                                                                                                 
+	- `Time.GravityAccelerometer.STD. X`
+	- `Time.GravityAccelerometer.STD. Y`
+	- `Time.GravityAccelerometer.STD. Z`
 
-        **[Time.BodyGyroscope.Jerk.Mean.                         numeric        10295  0.00 %                
-        X]**                                                                                                 
+- Average time-domain body acceleration jerk (derivation of the acceleration in time) in the X, Y and Z directions:
 
-        **[Time.BodyGyroscope.Jerk.Mean.                         numeric        10299  0.00 %                
-        Y]**                                                                                                 
+	- `Time.BodyAccelerometer.Jerk.Mean. X`
+	- `Time.BodyAccelerometer.Jerk.Mean. Y`
+	- `Time.BodyAccelerometer.Jerk.Mean. Z`
 
-        **[Time.BodyGyroscope.Jerk.Mean.                         numeric        10298  0.00 %                
-        Z]**                                                                                                 
+- Standard deviation of the time-domain body acceleration jerk (derivation of the acceleration in time) in the X, Y and Z directions:
 
-        **[Time.BodyGyroscope.Jerk.STD.                          numeric        10292  0.00 %                
-        X]**                                                                                                 
+	- `Time.BodyAccelerometer.Jerk.STD. X`
+	- `Time.BodyAccelerometer.Jerk.STD. Y `
+	- `Time.BodyAccelerometer.Jerk.STD. Z`
 
-        **[Time.BodyGyroscope.Jerk.STD.                          numeric        10295  0.00 %                
-        Y]**                                                                                                 
+- Average time-domain body angular velocity in the X, Y and Z directions:
 
-        **[Time.BodyGyroscope.Jerk.STD.                          numeric        10291  0.00 %                
-        Z]**                                                                                                 
+	- `Time.BodyGyroscope.Mean. X`
+	- `Time.BodyGyroscope.Mean. Y`
+	- `Time.BodyGyroscope.Mean. Z`
 
-        **[Time.BodyAccelerometer.Magnitude.Mean.                numeric        10296  0.00 %                
-        ]**                                                                                                  
+- Standard deviation of the time-domain body angular velocity in the X, Y and Z directions:
 
-        **[Time.BodyAccelerometer.Magnitude.STD.                 numeric        10294  0.00 %                
-        ]**                                                                                                  
+	- `Time.BodyGyroscope.STD. X`
+	- `Time.BodyGyroscope.STD. Y`
+	- `Time.BodyGyroscope.STD. Z`
 
-        **[Time.GravityAccelerometer.Magnitude.Mean.             numeric        10296  0.00 %                
-        ]**                                                                                                  
+- Average time-domain body angular velocity jerk (derivation of the angular velocity in time) in the X, Y and Z directions:
 
-        **[Time.GravityAccelerometer.Magnitude.STD.              numeric        10294  0.00 %                
-        ]**                                                                                                  
+	- `Time.BodyGyroscope.Jerk.Mean. X`
+	- `Time.BodyGyroscope.Jerk.Mean. Y`
+	- `Time.BodyGyroscope.Jerk.Mean. Z`
 
-        **[Time.BodyAccelerometer.JerkMagnitude.Mean.            numeric        10292  0.00 %                
-        ]**                                                                                                  
+- Standard deviation of the time-domain body angular velocity jerk (derivation of the angular velocity in time) in the X, Y and Z directions:
 
-        **[Time.BodyAccelerometer.JerkMagnitude.STD.             numeric        10294  0.00 %                
-        ]**                                                                                                  
+	- `Time.BodyGyroscope.Jerk.STD. X`
+	- `Time.BodyGyroscope.Jerk.STD. Y`
+	- `Time.BodyGyroscope.Jerk.STD. Z`
 
-        **[Time.BodyGyroscope.Magnitude.Mean.                    numeric        10298  0.00 %                
-        ]**                                                                                                  
+- Average and standard deviation of the time-domain magnitude of body acceleration:
 
-        **[Time.BodyGyroscope.Magnitude.STD.                     numeric        10298  0.00 %                
-        ]**                                                                                                  
+	- `Time.BodyAccelerometer.Magnitude.Mean`
+	- `Time.BodyAccelerometer.Magnitude.STD
 
-        **[Time.BodyGyroscope.JerkMagnitude.Mean.                numeric        10293  0.00 %                
-        ]**                                                                                                  
+- Average and standard deviation of the time-domain magnitude of gravity acceleration:
 
-        **[Time.BodyGyroscope.JerkMagnitude.STD.                 numeric        10297  0.00 %                
-        ]**                                                                                                  
+	- `Time.GravityAccelerometer.Magnitude.Mean`
+	- `Time.GravityAccelerometer.Magnitude.STD`
 
-        **[Freq.BodyAccelerometer.Mean.                          numeric        10295  0.00 %                
-        X]**                                                                                                 
+- Average and standard deviation of the time-domain magnitude of body acceleration jerk (derivation of the acceleration in time):
 
-        **[Freq.BodyAccelerometer.Mean.                          numeric        10292  0.00 %                
-        Y]**                                                                                                 
+	- `Time.BodyAccelerometer.JerkMagnitude.Mean`
+	- `Time.BodyAccelerometer.JerkMagnitude.STD`
 
-        **[Freq.BodyAccelerometer.Mean.                          numeric        10295  0.00 %                
-        Z]**                                                                                                 
+- Average and standard deviation of the time-domain magnitude of body angular velocity:
 
-        **[Freq.BodyAccelerometer.STD.                           numeric        10294  0.00 %                
-        X]**                                                                                                 
+	- `Time.BodyGyroscope.Magnitude.Mean`
+	- `Time.BodyGyroscope.Magnitude.STD`
 
-        **[Freq.BodyAccelerometer.STD.                           numeric        10297  0.00 %                
-        Y]**                                                                                                 
+- Average and standard deviation of the time-domain magnitude of body angular velocity jerk (derivation of the angular velocity in time):
 
-        **[Freq.BodyAccelerometer.STD.                           numeric        10296  0.00 %                
-        Z]**                                                                                                 
+	- `Time.BodyGyroscope.JerkMagnitude.Mean`
+	- `Time.BodyGyroscope.JerkMagnitude.STD`
 
-        **[Freq.BodyAccelerometer.Mean.Freq.                     numeric        10299  0.00 %                
-        X]**                                                                                                 
+#### Frequency-domain signals
 
-        **[Freq.BodyAccelerometer.Mean.Freq.                     numeric        10299  0.00 %                
-        Y]**                                                                                                 
+- Average frequency-domain body acceleration in the X, Y and Z directions:
 
-        **[Freq.BodyAccelerometer.Mean.Freq.                     numeric        10299  0.00 %                
-        Z]**                                                                                                 
+	- `Freq.BodyAccelerometer.Mean. X`
+	- `Freq.BodyAccelerometer.Mean. Y`
+	- `Freq.BodyAccelerometer.Mean. Z`
 
-        **[Freq.BodyAccelerometer.Jerk.Mean.                     numeric        10293  0.00 %                
-        X]**                                                                                                 
+- Standard deviation of the frequency-domain body acceleration in the X, Y and Z directions:
 
-        **[Freq.BodyAccelerometer.Jerk.Mean.                     numeric        10296  0.00 %                
-        Y]**                                                                                                 
+	- `Freq.BodyAccelerometer.STD. X`
+	- `Freq.BodyAccelerometer.STD. Y`
+	- `Freq.BodyAccelerometer.STD. Z`
 
-        **[Freq.BodyAccelerometer.Jerk.Mean.                     numeric        10294  0.00 %                
-        Z]**                                                                                                 
+- Weighted average of the frequency components of the frequency-domain body acceleration in the X, Y and Z directions:
 
-        **[Freq.BodyAccelerometer.Jerk.STD.                      numeric        10291  0.00 %                
-        X]**                                                                                                 
+	- `Freq.BodyAccelerometer.Mean.Freq. X`
+	- `Freq.BodyAccelerometer.Mean.Freq. Y`
+	- `Freq.BodyAccelerometer.Mean.Freq. Z`
 
-        **[Freq.BodyAccelerometer.Jerk.STD.                      numeric        10294  0.00 %                
-        Y]**                                                                                                 
+- Average frequency-domain body acceleration jerk (derivation of the acceleration in time) in the X, Y and Z directions:
 
-        **[Freq.BodyAccelerometer.Jerk.STD.                      numeric        10290  0.00 %                
-        Z]**                                                                                                 
+	- `Freq.BodyAccelerometer.Jerk.Mean. X`
+	- `Freq.BodyAccelerometer.Jerk.Mean. Y`
+	- `Freq.BodyAccelerometer.Jerk.Mean. Z
 
-        **[Freq.BodyAccelerometer.Jerk.Mean.Freq.                numeric        10298  0.00 %                
-        X]**                                                                                                 
+- Standard deviation of the frequency-domain body acceleration jerk (derivation of the acceleration in time) in the X, Y and Z directions:
 
-        **[Freq.BodyAccelerometer.Jerk.Mean.Freq.                numeric        10299  0.00 %                
-        Y]**                                                                                                 
+	- `Freq.BodyAccelerometer.Jerk.STD. X`
+	- `Freq.BodyAccelerometer.Jerk.STD. Y`
+	- `Freq.BodyAccelerometer.Jerk.STD. Z`
 
-        **[Freq.BodyAccelerometer.Jerk.Mean.Freq.                numeric        10298  0.00 %                
-        Z]**                                                                                                 
+- Weighted average of the frequency components of the frequency-domain body acceleration jerk (derivation of the acceleration in time) in the X, Y and Z directions:
 
-        **[Freq.BodyGyroscope.Mean.                              numeric        10297  0.00 %                
-        X]**                                                                                                 
+	- `Freq.BodyAccelerometer.Jerk.Mean.Freq. X`
+	- `Freq.BodyAccelerometer.Jerk.Mean.Freq. Y`
+	- `Freq.BodyAccelerometer.Jerk.Mean.Freq. Z`
 
-        **[Freq.BodyGyroscope.Mean.                              numeric        10296  0.00 %                
-        Y]**                                                                                                 
+- Average frequency-domain body angular velocity in the X, Y and Z directions:
 
-        **[Freq.BodyGyroscope.Mean.                              numeric        10297  0.00 %                
-        Z]**                                                                                                 
+	- `Freq.BodyGyroscope.Mean. X`
+	- `Freq.BodyGyroscope.Mean. Y`
+	- `Freq.BodyGyroscope.Mean. Z`
 
-        **[Freq.BodyGyroscope.STD.                               numeric        10297  0.00 %                
-        X]**                                                                                                 
+- Standard deviation of the frequency-domain body angular velocity in the X, Y and Z directions:
 
-        **[Freq.BodyGyroscope.STD.                               numeric        10293  0.00 %                
-        Y]**                                                                                                 
+	- `Freq.BodyGyroscope.STD. X`
+	- `Freq.BodyGyroscope.STD. Y`
+	- `Freq.BodyGyroscope.STD. Z`
 
-        **[Freq.BodyGyroscope.STD.                               numeric        10295  0.00 %                
-        Z]**                                                                                                 
+- Weighted average of the frequency components of the frequency-domain body angular velocity in the X, Y and Z directions:
 
-        **[Freq.BodyGyroscope.Mean.Freq.                         numeric        10298  0.00 %                
-        X]**                                                                                                 
+	- `Freq.BodyGyroscope.Mean.Freq. X`
+	- `Freq.BodyGyroscope.Mean.Freq. Y`
+	- `Freq.BodyGyroscope.Mean.Freq. Z`
 
-        **[Freq.BodyGyroscope.Mean.Freq.                         numeric        10299  0.00 %                
-        Y]**                                                                                                 
+- Average, standard deviation, and weighted average of the frequency components of the frequency-domain magnitude of body acceleration:
 
-        **[Freq.BodyGyroscope.Mean.Freq.                         numeric        10299  0.00 %                
-        Z]**                                                                                                 
+	- `Freq.BodyAccelerometer.Magnitude.Mean`
+	- `Freq.BodyAccelerometer.Magnitude.STD`
+	- `Freq.BodyAccelerometer.Magnitude.Mean.Freq`
 
-        **[Freq.BodyAccelerometer.Magnitude.Mean.                numeric        10296  0.00 %                
-        ]**                                                                                                  
+- Average, standard deviation, and weighted average of the frequency components of the frequency-domain magnitude of body acceleration jerk (derivation of the acceleration in time):
 
-        **[Freq.BodyAccelerometer.Magnitude.STD.                 numeric        10298  0.00 %                
-        ]**                                                                                                  
+	- `Freq.BodyBodyAccelerometer.JerkMagnitude.Mean`
+	- `Freq.BodyBodyAccelerometer.JerkMagnitude.STD`
+	- `Freq.BodyBodyAccelerometer.JerkMagnitude.Mean.Freq`
 
-        **[Freq.BodyAccelerometer.Magnitude.Mean.Freq.           numeric        10299  0.00 %                
-        ]**                                                                                                  
+- Average, standard deviation, and weighted average of the frequency components of the frequency-domain magnitude of body angular velocity:
 
-        **[Freq.BodyBodyAccelerometer.JerkMagnitude.Mean.        numeric        10290  0.00 %                
-        ]**                                                                                                  
+	- `Freq.BodyBodyGyroscope.Magnitude.Mean`
+	- `Freq.BodyBodyGyroscope.Magnitude.STD`
+	- `Freq.BodyBodyGyroscope.Magnitude.Mean.Freq`
 
-        **[Freq.BodyBodyAccelerometer.JerkMagnitude.STD.         numeric        10296  0.00 %                
-        ]**                                                                                                  
+- Average, standard deviation, and weighted average of the frequency components of the frequency-domain magnitude of body angular velocity jerk (derivation of the angular velocity in time):
 
-        **[Freq.BodyBodyAccelerometer.JerkMagnitude.Mean.Freq.   numeric        10299  0.00 %                
-        ]**                                                                                                  
-
-        **[Freq.BodyBodyGyroscope.Magnitude.Mean.                numeric        10297  0.00 %                
-        ]**                                                                                                  
-
-        **[Freq.BodyBodyGyroscope.Magnitude.STD.                 numeric        10296  0.00 %                
-        ]**                                                                                                  
-
-        **[Freq.BodyBodyGyroscope.Magnitude.Mean.Freq.           numeric        10299  0.00 %                
-        ]**                                                                                                  
-
-        **[Freq.BodyBodyGyroscope.JerkMagnitude.Mean.            numeric        10293  0.00 %                
-        ]**                                                                                                  
-
-        **[Freq.BodyBodyGyroscope.JerkMagnitude.STD.             numeric        10292  0.00 %                
-        ]**                                                                                                  
-
-        **[Freq.BodyBodyGyroscope.JerkMagnitude.Mean.Freq.       numeric        10299  0.00 %                
-        ]**                                                                                                  
--------------------------------------------------------------------------------------------------------------
+	- `Freq.BodyBodyGyroscope.JerkMagnitude.Mean`
+	- `Freq.BodyBodyGyroscope.JerkMagnitude.STD`
+	- `Freq.BodyBodyGyroscope.JerkMagnitude.Mean.Freq`
