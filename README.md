@@ -1,3 +1,8 @@
+---
+title: Tidy data set column details
+output: html_document
+---
+
 ###The purpose of this document is to explain the execution steps followed in the run_analysis.R script.
 
 ###**Functions:**
