@@ -3,9 +3,9 @@ The purpose of this document is to explain the execution steps followed in the r
 
 # **Functions:**
 The script has one function `build_tidy_dataset`
-**Purpose** The function reads all the files from the "test" or the "train" folder based the value of its input parameter `type`
-**Input:** type. Possible values are `test` or `train`
-**Output:** a tidy data frame which has data for all the subjects, activities, features from the test/train folder. The activity labels for the corresponding activity ids are also added.
+### **Purpose** The function reads all the files from the "test" or the "train" folder based the value of its input parameter `type`
+### **Input:** type. Possible values are `test` or `train`
+### **Output:** a tidy data frame which has data for all the subjects, activities, features from the test/train folder. The activity labels for the corresponding activity ids are also added.
 
 # **Below are are high-level steps of execution:**
 1. Read the column names from the "*features.txt*" files and clean up the names by removing unwanted special characters.
