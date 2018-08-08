@@ -1,32 +1,28 @@
 ---
-title: Tidy data set column details
+title: "Untitled"
 output: html_document
 ---
 
-## The below table describes in details the names, class and description of each of the column of the tidy data set.
-
-
-
-```{r echo=FALSE}
-mypath <- getwd()
-library(knitr)
-source("run_analysis.R")
-ColNames <- names(tidy_mean_std_col_data)
-ColNames <- gsub("Freq", "Frequency", ColNames)
-ColNames <- gsub("\\."," ",ColNames)
-contents <- function(x){
-        data.frame(Class=sapply(x,class))
-        }
-contentSummary <- function(x){
-        data.frame(sapply(x,summary))
-        }
-
-tidy_details <- contents(tidy_mean_std_col_data)
-tidy_details$Description <- ColNames
-tidy_details1 <- contentSummary(tidy_mean_std_col_data)
-setwd(mypath)
-```
-```{r echo=FALSE, results='asis'}
-kable(tidy_details)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
